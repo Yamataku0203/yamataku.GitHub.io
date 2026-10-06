@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2級建築施工管理技士補 学科演習</title>
+<style>
+:root{
+  --paper:#F4F3EE;
+  --surface:#FFFFFF;
+  --ink:#232B31;
+  --ink-soft:#5C6A73;
+  --muted:#8A959C;
+  --rule:#DAD8D0;
+  --rule-strong:#BFBDB3;
+  --blue:#1B5E7E;
+  --blue-soft:#E7EFF3;
+  --ok:#2F7A54;
+  --ok-soft:#E6F1EA;
+  --ng:#B33A2B;
+  --ng-soft:#F7E9E6;
+  --warn:#B98700;
+  --warn-soft:#FBF2DC;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP","MS PMincho",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--gothic);
+  font-size:15px;line-height:1.7;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- shell ---------- */
+.masthead{
+  background:var(--ink);color:#EDEBE4;
+  padding:14px 20px 12px;
+}
+.masthead h1{font-size:15px;font-weight:600;letter-spacing:.04em}
+.masthead .sub{font-size:11.5px;color:#9EAAB2;margin-top:1px}
+
+nav.tabs{
+  display:flex;background:var(--surface);
+  border-bottom:1px solid var(--rule);
+  overflow-x:auto;scrollbar-width:none;
+  position:sticky;top:0;z-index:20;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{
+  flex:0 0 auto;padding:13px 17px;font-size:13.5px;font-weight:500;
+  color:var(--ink-soft);border-bottom:2.5px solid transparent;white-space:nowrap;
+}
+nav.tabs button[aria-current="true"]{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
+
+main{max-width:720px;margin:0 auto;padding:22px 18px 80px}
+.view{display:none}
+.view.on{display:block}
+
+h2.vt{font-size:19px;font-weight:700;letter-spacing:.02em;margin-bottom:5px}
+p.vd{font-size:13px;color:var(--ink-soft);margin-bottom:20px;line-height:1.65}
+
+/* ---------- panel ---------- */
+.panel{
+  background:var(--surface);border:1px solid var(--rule);
+  border-radius:3px;padding:18px;margin-bottom:14px;
+}
+.panel > h3{font-size:14px;font-weight:700;margin-bottom:12px}
+
+/* ---------- gauge ---------- */
+.gauge{margin:4px 0 6px}
+.gauge-top{display:flex;align-items:baseline;gap:9px;margin-bottom:9px}
+.gauge-num{font-size:44px;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.gauge-unit{font-size:13px;color:var(--ink-soft)}
+.gauge-bar{position:relative;height:9px;background:#E8E6DE;border-radius:1px;overflow:hidden}
+.gauge-fill{position:absolute;inset:0 auto 0 0;background:var(--blue)}
+.gauge-fill.pass{background:var(--ok)}
+.gauge-line{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.gauge-legend{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:7px}
+
+/* ---------- stat strip ---------- */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule)}
+.strip div{padding:13px 4px;text-align:center;border-right:1px solid var(--rule)}
+.strip div:last-child{border-right:none}
+.strip b{display:block;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.strip span{font-size:11.5px;color:var(--ink-soft)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:block;width:100%;text-align:left;
+  background:var(--surface);border:1px solid var(--rule-strong);
+  border-radius:3px;padding:14px 16px;margin-bottom:9px;
+  transition:border-color .12s,background .12s;
+}
+.btn:hover{border-color:var(--blue);background:var(--blue-soft)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled:hover{border-color:var(--rule-strong);background:var(--surface)}
+.btn b{display:block;font-size:14.5px;font-weight:600}
+.btn small{display:block;font-size:12px;color:var(--ink-soft);margin-top:2px;line-height:1.55}
+.btn-primary{
+  background:var(--blue);border-color:var(--blue);color:#fff;
+  text-align:center;font-weight:700;font-size:15px;padding:14px;
+}
+.btn-primary:hover{background:#164F6A;border-color:#164F6A}
+.btn-primary:disabled:hover{background:var(--blue)}
+.btn-quiet{
+  border:1px solid var(--rule-strong);text-align:center;
+  font-size:13px;padding:10px;font-weight:500;
+}
+.btn-row{display:flex;gap:9px}
+.btn-row > *{flex:1;margin-bottom:0}
+
+.qfig{
+  display:block;max-width:100%;height:auto;margin:0 auto 20px;
+  background:#fff;border:1px solid var(--rule);border-radius:3px;padding:10px;
+}
+.cfig{display:block;max-width:100%;height:auto;margin:8px 0 2px;background:#fff}
+.choice span{min-width:0}
+
+/* ---------- bars ---------- */
+.bars{display:flex;align-items:flex-end;gap:4px;height:150px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;min-width:0}
+.bar-val{font-size:10.5px;color:var(--ink-soft);height:14px;font-variant-numeric:tabular-nums}
+.bar-track{flex:1;width:100%;display:flex;align-items:flex-end;background:#EFEEE8;border-radius:1px;overflow:hidden}
+.bar-track i{display:block;width:100%;border-radius:1px 1px 0 0}
+.bar-lb{font-size:10.5px;color:var(--muted);margin-top:5px;white-space:nowrap}
+.bar-lb.now{color:var(--ink);font-weight:700}
+
+/* ---------- subtabs ---------- */
+.subtabs{display:flex;border-bottom:1px solid var(--rule-strong);margin-bottom:16px}
+.subtabs button{
+  padding:9px 17px;font-size:13.5px;font-weight:500;color:var(--ink-soft);
+  border-bottom:2.5px solid transparent;margin-bottom:-1px;
+}
+.subtabs button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:700}
+.subtabs button span{font-size:11.5px;color:var(--muted);margin-left:6px;font-variant-numeric:tabular-nums}
+.subtabs button[aria-pressed="true"] span{color:var(--ink-soft)}
+.grp-label{font-size:12px;color:var(--muted);margin:16px 0 7px;font-weight:600}
+.grp-label:first-child{margin-top:0}
+
+/* ---------- toggle ---------- */
+.seg{display:flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden;margin-bottom:14px}
+.seg button{flex:1;padding:10px 6px;font-size:12.5px;font-weight:500;color:var(--ink-soft);border-right:1px solid var(--rule)}
+.seg button:last-child{border-right:none}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:700}
+
+/* ---------- quiz ---------- */
+#quiz{position:fixed;inset:0;background:var(--paper);z-index:60;overflow-y:auto;display:none;flex-direction:column}
+#quiz.on{display:flex}
+.qbar{
+  position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--rule);
+  padding:11px 16px;display:flex;align-items:center;gap:12px;z-index:5;
+}
+.qbar .qtitle{font-size:12.5px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qbar .qcount{font-size:12.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.qbar .qclose{font-size:12.5px;color:var(--ink-soft);padding:3px 7px;border:1px solid var(--rule-strong);border-radius:3px}
+.qprog{height:3px;background:#E8E6DE}
+.qprog i{display:block;height:100%;background:var(--blue);transition:width .2s}
+.qwrap{max-width:720px;margin:0 auto;padding:22px 18px 40px;width:100%}
+
+.qmeta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.qno{
+  font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;
+  background:var(--ink);color:#fff;padding:3px 9px;border-radius:2px;
+}
+.qcat{font-size:11.5px;color:var(--ink-soft);border:1px solid var(--rule-strong);padding:2px 8px;border-radius:2px}
+.qsrc{font-size:11.5px;color:var(--muted)}
+
+.qtext{
+  font-family:var(--mincho);font-size:17px;line-height:1.95;
+  margin-bottom:20px;white-space:pre-wrap;
+}
+.choices{margin-bottom:18px}
+.choice{
+  display:flex;gap:12px;width:100%;text-align:left;
+  background:var(--surface);border:1px solid var(--rule-strong);
+  border-radius:3px;padding:13px 15px;margin-bottom:8px;
+  font-family:var(--mincho);font-size:15.5px;line-height:1.8;
+  transition:border-color .12s,background .12s;
+}
+.choice:hover:not(:disabled){border-color:var(--blue);background:var(--blue-soft)}
+.choice i{
+  font-family:var(--gothic);font-style:normal;font-weight:700;font-size:13px;
+  color:var(--ink-soft);flex:0 0 auto;padding-top:1px;
+}
+.choice[data-s="sel"]{border-color:var(--blue);background:var(--blue-soft);border-width:2px;padding:12px 14px}
+.choice[data-s="ok"]{border-color:var(--ok);background:var(--ok-soft);border-width:2px;padding:12px 14px}
+.choice[data-s="ok"] i{color:var(--ok)}
+.choice[data-s="ng"]{border-color:var(--ng);background:var(--ng-soft);border-width:2px;padding:12px 14px}
+.choice[data-s="ng"] i{color:var(--ng)}
+.choice:disabled{cursor:default}
+
+.verdict{border-radius:3px;padding:14px 16px;margin-bottom:16px;font-size:13.5px;line-height:1.8}
+.verdict.ok{background:var(--ok-soft);border-left:3px solid var(--ok)}
+.verdict.ng{background:var(--ng-soft);border-left:3px solid var(--ng)}
+.verdict b{display:block;font-size:14px;margin-bottom:5px}
+.pick-note{
+  background:var(--warn-soft);border-left:3px solid var(--warn);
+  border-radius:3px;padding:10px 14px;margin-bottom:14px;font-size:13px;
+}
+.pick-note b{font-weight:700}
+.verdict .exp{font-family:var(--mincho);font-size:14.5px;line-height:1.9;margin-top:7px;white-space:pre-wrap}
+
+/* ---------- result ---------- */
+.res-head{text-align:center;padding:26px 0 22px;border-bottom:1px solid var(--rule);margin-bottom:20px}
+.res-score{font-size:56px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.res-score small{font-size:20px;font-weight:500;color:var(--ink-soft)}
+.res-rate{font-size:13.5px;color:var(--ink-soft);margin-top:8px}
+.res-badge{
+  display:inline-block;margin-top:13px;padding:5px 16px;border-radius:2px;
+  font-size:13px;font-weight:700;
+}
+.res-badge.pass{background:var(--ok);color:#fff}
+.res-badge.fail{background:var(--ng-soft);color:var(--ng);border:1px solid var(--ng)}
+
+.rev{border-top:1px solid var(--rule)}
+.rev-item{border-bottom:1px solid var(--rule);padding:12px 2px}
+.rev-h{display:flex;gap:10px;align-items:center;width:100%;text-align:left}
+.rev-mark{
+  flex:0 0 auto;width:23px;height:23px;border-radius:50%;
+  display:grid;place-items:center;font-size:13px;font-weight:700;color:#fff;
+}
+.rev-mark.ok{background:var(--ok)}
+.rev-mark.ng{background:var(--ng)}
+.rev-t{flex:1;min-width:0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rev-n{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 auto}
+.rev-body{display:none;padding:12px 0 4px}
+.rev-body.on{display:block}
+
+/* ---------- table ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{
+  text-align:left;font-size:11.5px;font-weight:600;color:var(--ink-soft);
+  padding:7px 8px;border-bottom:1px solid var(--rule-strong);
+}
+.tbl td{padding:9px 8px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.tbl td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.heat{display:inline-block;width:44px;height:7px;border-radius:1px;background:#E8E6DE;position:relative;overflow:hidden;vertical-align:middle;margin-right:8px}
+.heat i{position:absolute;inset:0 auto 0 0;display:block}
+
+/* ---------- misc ---------- */
+.empty{
+  border:1px dashed var(--rule-strong);border-radius:3px;
+  padding:28px 20px;text-align:center;color:var(--ink-soft);font-size:13px;line-height:1.8;
+}
+.note{font-size:12.5px;color:var(--ink-soft);line-height:1.75;margin-top:10px}
+.chip{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:2px;background:var(--blue-soft);color:var(--blue);margin:0 5px 5px 0}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.ng{background:var(--ng-soft);color:var(--ng)}
+label.fld{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px}
+select,input[type=number]{
+  width:100%;padding:10px 11px;font:inherit;font-size:14px;
+  border:1px solid var(--rule-strong);border-radius:3px;background:var(--surface);
+  margin-bottom:13px;
+}
+textarea{
+  width:100%;min-height:120px;padding:11px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:12px;line-height:1.6;border:1px solid var(--rule-strong);border-radius:3px;
+  background:var(--surface);resize:vertical;
+}
+.log{
+  font-size:12px;line-height:1.8;margin-top:12px;padding:12px;
+  background:var(--paper);border-radius:3px;border:1px solid var(--rule);
+  max-height:260px;overflow-y:auto;
+}
+.log .e{color:var(--ng)}
+.log .w{color:var(--warn)}
+.log .s{color:var(--ok)}
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  background:var(--ink);color:#fff;padding:11px 20px;border-radius:3px;
+  font-size:13px;z-index:99;opacity:0;pointer-events:none;transition:opacity .2s;
+  max-width:calc(100% - 36px);text-align:center;
+}
+.toast.on{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(35,43,49,.55);z-index:80;display:grid;place-items:center;padding:20px}
+.modal[hidden]{display:none}
+.modal-card{background:var(--surface);border-radius:4px;padding:22px;max-width:400px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.modal-card h4{font-size:15px;font-weight:700;margin-bottom:8px}
+.modal-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.75;margin-bottom:18px}
+.btn-primary.danger{background:var(--ng);border-color:var(--ng)}
+.btn-primary.danger:hover{background:#9A3124;border-color:#9A3124}
+.del-btn{
+  flex:0 0 auto;padding:7px 13px;border-radius:3px;font-size:12.5px;font-weight:600;
+  color:var(--ng);border:1px solid var(--ng);background:var(--surface);
+}
+.del-btn:hover{background:var(--ng);color:#fff}
+hr.sep{border:none;border-top:1px solid var(--rule);margin:22px 0}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1>2級建築施工管理技士補 学科演習</h1>
+  <div class="sub" id="mast-sub">データ読み込み中</div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-v="home" aria-current="true">ホーム</button>
+  <button data-v="past">過去問</button>
+  <button data-v="mock">模擬試験</button>
+  <button data-v="weak">苦手克服</button>
+  <button data-v="stats">成績</button>
+  <button data-v="data">データ</button>
+</nav>
+
+<main>
+
+<!-- ========== HOME ========== -->
+<section class="view on" id="v-home">
+  <div id="home-body"></div>
+</section>
+
+<!-- ========== 過去問 ========== -->
+<section class="view" id="v-past">
+  <h2 class="vt">過去問モード</h2>
+  <p class="vd">読み込んだ年度をそのままの並びで解きます。本番と同じ順序・同じ問題構成です。</p>
+  <div class="subtabs" id="past-term"></div>
+  <div class="seg" id="past-seg">
+    <button data-m="each" aria-pressed="true">1問ずつ答え合わせ</button>
+    <button data-m="end" aria-pressed="false">最後にまとめて採点</button>
+  </div>
+  <div id="past-body"></div>
+</section>
+
+<!-- ========== 模擬試験 ========== -->
+<section class="view" id="v-mock">
+  <h2 class="vt">模擬試験モード</h2>
+  <p class="vd">設問番号ごとの分野を保ったまま、読み込んだ全年度から問題を差し替えて1セットを組み立てます。本番と同じ体感で、最後にまとめて採点します。</p>
+  <div id="mock-body"></div>
+</section>
+
+<!-- ========== 苦手克服 ========== -->
+<section class="view" id="v-weak">
+  <h2 class="vt">苦手克服モード</h2>
+  <p class="vd">過去問・模擬試験の解答履歴から、取りこぼしている問題と分野を抜き出します。1問ずつ答え合わせで進みます。</p>
+  <div id="weak-body"></div>
+</section>
+
+<!-- ========== 成績 ========== -->
+<section class="view" id="v-stats">
+  <h2 class="vt">成績</h2>
+  <p class="vd">解いた記録をもとに、分野ごとの正答率と、日別・週別の取り組み状況を出します。</p>
+  <div class="subtabs" id="stats-tab"></div>
+  <div id="stats-body"></div>
+</section>
+
+<!-- ========== データ ========== -->
+<section class="view" id="v-data">
+  <h2 class="vt">データ</h2>
+  <p class="vd">このサイトに最初から入っている年度は、開いた時点でそのまま使えます。ここで足したJSONは、この端末のこのブラウザだけに保存されます。</p>
+
+  <div class="panel">
+    <h3>JSONを追加する</h3>
+    <label class="fld" for="year-override">年度ラベル（空欄なら自動判定）</label>
+    <input type="text" id="year-override" placeholder="例：令和7年度後期" autocomplete="off">
+    <p class="note" style="margin:-6px 0 14px">前期と後期が同じ名前になってしまう場合は、ここに回まで入れてから取り込んでください。1ファイルに1年度分のときだけ効きます。</p>
+    <div class="btn-row" style="margin-bottom:12px">
+      <button class="btn btn-quiet" id="pick-file">ファイルを選ぶ</button>
+      <button class="btn btn-quiet" id="paste-toggle">貼り付けて追加</button>
+    </div>
+    <input type="file" id="file-in" accept=".json,application/json" multiple hidden>
+    <div id="paste-box" hidden>
+      <textarea id="paste-area" placeholder="JSONをここに貼り付け"></textarea>
+      <button class="btn btn-primary" id="paste-go" style="margin-top:10px">追加する</button>
+    </div>
+    <div class="log" id="import-log" hidden></div>
+  </div>
+
+  <div class="panel">
+    <h3>読み込み済みの年度</h3>
+    <div id="year-list"></div>
+  </div>
+
+  <div class="panel">
+    <h3>書き出しと削除</h3>
+    <div class="btn-row">
+      <button class="btn btn-quiet" id="export-bank">問題データを書き出す</button>
+      <button class="btn btn-quiet" id="export-hist">解答履歴を書き出す</button>
+    </div>
+    <p class="note">書き出しには、最初から入っている分と自分で足した分の両方が含まれます。自分で足した分と解答履歴の保存先はこのブラウザなので、端末を変えると引き継がれません。書き出したファイルを持ち運んでください。</p>
+    <hr class="sep">
+    <button class="btn btn-quiet" id="reset-hist" style="color:var(--ng);border-color:var(--ng)">解答履歴をすべて消す</button>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== QUIZ OVERLAY ========== -->
+<div id="quiz">
+  <div class="qbar">
+    <span class="qtitle" id="q-title"></span>
+    <span class="qcount" id="q-count"></span>
+    <button class="qclose" id="q-close">中断</button>
+  </div>
+  <div class="qprog"><i id="q-prog"></i></div>
+  <div class="qwrap" id="q-wrap"></div>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="alertdialog" aria-modal="true" aria-labelledby="m-title">
+    <h4 id="m-title"></h4>
+    <p id="m-body"></p>
+    <div class="btn-row">
+      <button class="btn btn-quiet" id="m-no">やめる</button>
+      <button class="btn btn-primary" id="m-yes">続ける</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ========== 配布する問題データ ==========
+     「データ」タブの「問題データを書き出す」で出したJSONを、下の null と置き換えて貼り付けます。
+     貼らない場合は、index.html と同じ場所に questions.json を置けばそちらを読みます。
+     どちらもブラウザには保存されないので、差し替えれば次に開いた全員に届きます。 -->
+<script id="bundled-data" type="application/json">null</script>
+
+<script>
+"use strict";
+
+/* ============ 定数 ============ */
+const K_BANK='k2q.bank', K_HIST='k2q.hist', K_SESS='k2q.sess', K_CFG='k2q.cfg';
+const PASS_RATE=0.60;            // 合格は得点の60%
+const EXAM_FULL=40;              // 一次検定は50問出題・40問解答＝40点満点（合格24点）
+const EST_MIN=40;                // これ未満の解答数では推定得点を参考値扱いにする
+const BANK_FORMAT='k2q-bank-1';  // 書き出しファイルの印（正解は0始まり）
+// 出題形式は年度で変わる（例：令和5年度の能力問題は四肢択二式）ため固定しない
+const MARKS=['1','2','3','4','5'];
+
+/* ============ 保存層 ============ */
+const useWS = typeof window!=='undefined' && window.storage && typeof window.storage.get==='function';
+const Store={
+  async get(k){
+    if(useWS){ try{ const r=await window.storage.get(k); return r&&r.value?JSON.parse(r.value):null; }catch(e){ /* 未作成キー */ } }
+    try{ const v=localStorage.getItem(k); return v?JSON.parse(v):null; }catch(e){ return null; }
+  },
+  async set(k,v){
+    const s=JSON.stringify(v);
+    if(useWS){ try{ await window.storage.set(k,s); return true; }catch(e){} }
+    try{ localStorage.setItem(k,s); return true; }
+    catch(e){ toast('保存できませんでした。ブラウザの空き容量を確認してください'); return false; }
+  },
+  async del(k){
+    if(useWS){ try{ await window.storage.delete(k); }catch(e){} }
+    try{ localStorage.removeItem(k); }catch(e){}
+  }
+};
+
+/* ============ 状態 ============ */
+let bank={years:{}};   // このブラウザに保存する分（ユーザーが自分で足した年度）
+let builtin={years:{}};// 配布データ。保存せず毎回読み直すので、更新すれば全員に届く
+let YRS={};            // 上の2つを合成した実体。画面はすべてこちらを見る
+let hist=[];           // { qid, cat, correct, ts, mode }
+let cfg={pastMode:'each'};
+let S=null;            // 実行中セッション
+
+/* 配布データを土台に、ユーザーが足した分を重ねる（同じ年度は設問番号で突き合わせ） */
+function rebuild(){
+  YRS={};
+  for(const [id,y] of Object.entries(builtin.years||{})){
+    YRS[id]={...y, questions:y.questions.slice(), builtin:true};
+  }
+  for(const [id,y] of Object.entries(bank.years||{})){
+    const base=YRS[id];
+    if(base){
+      const have=new Set(base.questions.map(q=>q.no));
+      const add=y.questions.filter(q=>!have.has(q.no));
+      base.questions=base.questions.concat(add).sort((a,b)=>a.no-b.no);
+      base.mine=add.length;
+    }else{
+      YRS[id]={...y, questions:y.questions.slice(), builtin:false};
+    }
+  }
+}
+
+/* ============ 小道具 ============ */
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let toastT;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2600);}
+
+/* 埋め込み環境では confirm() が無効化されるため自前のダイアログを使う */
+function ask(title,body,ok,danger){
+  return new Promise(res=>{
+    const m=$('#modal'), y=$('#m-yes'), n=$('#m-no'), bd=$('#m-body');
+    $('#m-title').textContent=title;
+    bd.textContent=body||''; bd.hidden=!body;
+    y.textContent=ok||'続ける';
+    y.classList.toggle('danger',!!danger);
+    m.hidden=false; y.focus();
+    const done=v=>{
+      m.hidden=true; y.onclick=n.onclick=m.onclick=null;
+      document.removeEventListener('keydown',key); res(v);
+    };
+    function key(e){ if(e.key==='Escape') done(false); }
+    y.onclick=()=>done(true);
+    n.onclick=()=>done(false);
+    m.onclick=e=>{ if(e.target===m) done(false); };
+    document.addEventListener('keydown',key);
+  });
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pct(n,d){return d?Math.round(n/d*100):0;}
+
+function allQ(){
+  const out=[];
+  for(const [yid,y] of Object.entries(YRS)){
+    for(const q of y.questions) out.push({...q, year:yid, yearLabel:y.label, qid:yid+'#'+q.no});
+  }
+  return out;
+}
+function yearIds(){
+  return Object.keys(YRS).sort((a,b)=>(YRS[b].order||0)-(YRS[a].order||0));
+}
+
+/* 年度ラベルから受験回（前期／後期）を判定 */
+function termOf(label){
+  const s=String(label);
+  if(/後期|第\s*2\s*回|第二回/.test(s)) return '後期';
+  if(/前期|第\s*1\s*回|第一回/.test(s)) return '前期';
+  return 'その他';
+}
+
+/* 年度ラベルから並び順キー（新しいほど大きい） */
+function orderKey(label){
+  const s=String(label);
+  let base=0;
+  let m;
+  if((m=s.match(/令和\s*(\d+|元)/)))      base=2018+(m[1]==='元'?1:+m[1]);
+  else if((m=s.match(/平成\s*(\d+|元)/))) base=1988+(m[1]==='元'?1:+m[1]);
+  else if((m=s.match(/(20\d{2})/)))       base=+m[1];
+  let t=0;
+  if(/後期|第2|II|Ⅱ/.test(s)) t=1;
+  return base*10+t;
+}
+
+/* ============ 履歴の集計 ============ */
+function histIndex(){
+  const m=new Map();
+  for(const h of hist){
+    let r=m.get(h.qid);
+    if(!r){ r={n:0,ok:0,streak:0,last:0,cat:h.cat}; m.set(h.qid,r); }
+    r.n++; if(h.correct){r.ok++;r.streak++;} else r.streak=0;
+    r.last=Math.max(r.last,h.ts||0);
+    if(h.cat) r.cat=h.cat;
+  }
+  return m;
+}
+function catStats(){
+  const m=new Map();
+  for(const h of hist){
+    const c=h.cat||'未分類';
+    let r=m.get(c); if(!r){r={n:0,ok:0};m.set(c,r);}
+    r.n++; if(h.correct) r.ok++;
+  }
+  return m;
+}
+
+/* ============ 分野スロット表（設問番号 → 出題分野） ============ */
+function slotMap(){
+  const m=new Map();
+  for(const y of Object.values(YRS)){
+    for(const q of y.questions){
+      if(!q.category) continue;
+      if(!m.has(q.no)) m.set(q.no,new Set());
+      m.get(q.no).add(q.category);
+    }
+  }
+  return m;
+}
+
+/* ============ 取り込み ============ */
+const AL={
+  no:['no','number','questionNo','question_no','num','id','問題番号','設問番号'],
+  text:['text','question','body','問題文','設問','statement','stem'],
+  choices:['choices','options','選択肢','answers','opts'],
+  // 'answers' は書き出したデータを読み直すときに使う。複数形を先に見る
+  answer:['answers','answer','correct','correctIndex','correct_answer','correctAnswers','正解','正答','answerIndex','ans'],
+  cat:['category','subject','area','subjectArea','subject_area','分野','科目','field'],
+  exp:['explanation','commentary','解説','desc','description','note'],
+  term:['term','期','回','season','kai','part','試験回'],
+  img:['image','img','figure','fig','図','図版','picture','photo'],
+  // 選択肢の図版を選択肢とは別の配列で持つ形式（書き出したデータがこの形）
+  chImg:['choiceImages','choice_images','choiceImage','optionImages','選択肢画像']
+};
+function pick(o,keys){ for(const k of keys) if(o[k]!=null && o[k]!=='') return o[k]; return null; }
+function looksQ(o){
+  if(!o||typeof o!=='object'||Array.isArray(o)) return false;
+  const c=pick(o,AL.choices);
+  return Array.isArray(c)&&c.length>=2;
+}
+
+/* 年度名ではなく単なる入れ物であるキー */
+const GENERIC=new Set(['questions','question','items','item','data','list','results','result',
+  'exams','exam','years','year','sets','set','entries','payload','content','root','body','rows',
+  'qs','q','問題','設問','問題集','一覧']);
+
+/* JSONを再帰的に走査して {年度ラベル: [問題]} を取り出す */
+function harvest(node,inherited,out){
+  if(Array.isArray(node)){
+    if(node.some(looksQ)){
+      for(const q of node){
+        if(!looksQ(q)) continue;
+        const y=String(pick(q,['year','yearLabel','年度','exam','試験'])||inherited||'不明な年度');
+        (out[y]=out[y]||[]).push(q);
+      }
+      return;
+    }
+    for(const n of node) harvest(n,inherited,out);
+    return;
+  }
+  if(node&&typeof node==='object'){
+    const self=pick(node,['year','yearLabel','label','title','name','年度','試験']);
+    const here=(self!=null&&typeof self!=='object')?String(self):inherited;
+    for(const [k,v] of Object.entries(node)){
+      if(v&&typeof v==='object'){
+        const named = !GENERIC.has(String(k).toLowerCase().trim()) && !/^\d+$/.test(k);
+        harvest(v, named?k:here, out);
+      }
+    }
+  }
+}
+
+function oneAnswer(raw,choices,zeroBased){
+  if(raw==null) return -1;
+  if(typeof raw==='number'||/^\d+$/.test(String(raw).trim())){
+    const n=parseInt(raw,10);
+    const i=zeroBased?n:n-1;
+    return (i>=0&&i<choices.length)?i:-1;
+  }
+  const s=String(raw).trim();
+  const kana='イロハニホ'.indexOf(s); if(kana>=0&&kana<choices.length) return kana;
+  const idx=choices.findIndex(c=>String(c).trim()===s);
+  return idx>=0?idx:-1;
+}
+/* 正解は常に配列で持つ。択二式は [1,2] のように2つ入る */
+function normalizeAnswers(raw,choices,zeroBased){
+  let list;
+  if(Array.isArray(raw)) list=raw;
+  else if(typeof raw==='string' && /[,、・\s]/.test(raw.trim())) list=raw.split(/[,、・\s]+/).filter(Boolean);
+  else list=[raw];
+  const out=[];
+  for(const r of list){
+    const i=oneAnswer(r,choices,zeroBased);
+    if(i<0) return [];
+    if(!out.includes(i)) out.push(i);
+  }
+  return out.sort((a,b)=>a-b);
+}
+
+/* 印が付く前に書き出したファイルを、形から見分ける */
+function looksExported(o){
+  if(!o||typeof o!=='object'||!o.years||typeof o.years!=='object') return false;
+  return Object.values(o.years).some(y=>
+    y && typeof y==='object' && Array.isArray(y.questions) &&
+    ('label' in y || 'order' in y) &&
+    y.questions.some(q=>q && Array.isArray(q.answers))
+  );
+}
+
+function importJSON(obj,log,forced){
+  const raw={};
+  harvest(obj,null,raw);
+  let groups=Object.entries(raw).filter(([,v])=>v.length);
+  if(!groups.length){ log('e','問題が見つかりません。choices（選択肢）を持つ配列が必要です'); return 0; }
+
+  // 年度ラベルの決定：手入力 > ラベル内の前期後期 > 問題内のterm項目
+  if(forced){
+    if(groups.length===1){ groups=[[forced,groups[0][1]]]; log('','年度ラベルを「'+forced+'」として取り込みます'); }
+    else log('w','この1ファイルに '+groups.length+' 年度分あるため、入力したラベルは使いません');
+  }
+  groups=groups.map(([label,qs])=>{
+    if(/前期|後期|第\s*[12１２一二]\s*回/.test(label)) return [label,qs];
+    const t=qs.map(q=>pick(q,AL.term)).find(v=>v!=null);
+    if(t!=null){
+      const s=String(t);
+      const add=/後|2|２|二/.test(s)?'後期':(/前|1|１|一/.test(s)?'前期':s);
+      log('','「'+label+'」に受験回「'+add+'」を補いました');
+      return [label+add,qs];
+    }
+    return [label,qs];
+  });
+
+  // 0始まりか1始まりかをファイル単位で判定
+  // このアプリが書き出したファイルは正解を0始まりで持つので、印を見て確定させる
+  //（全問の正解が2番以降だと「最小値が0か」では見分けられないため）
+  let zero=false;
+  if(obj && (obj.zeroBased===true || obj.format===BANK_FORMAT || looksExported(obj))){
+    zero=true;
+    log('','このアプリで書き出したファイルとして読み込みます');
+  }else{
+    const nums=[];
+    for(const [,qs] of groups) for(const q of qs){
+      const a=pick(q,AL.answer);
+      for(const v of (Array.isArray(a)?a:[a]))
+        if(typeof v==='number'||/^\d+$/.test(String(v))) nums.push(parseInt(v,10));
+    }
+    if(nums.length&&Math.min(...nums)===0) zero=true;
+  }
+
+  let added=0, skipped=0;
+  for(const [ylabel,qs] of groups){
+    const yid=ylabel;
+    const y = bank.years[yid] || (bank.years[yid]={label:ylabel,order:orderKey(ylabel),questions:[]});
+    const base = YRS[yid];   // 配布データにすでに入っている分も「登録済み」として扱う
+    const have=new Set([...(base?base.questions.map(q=>q.no):[]), ...y.questions.map(q=>q.no)]);
+    let n=0, dup=0, badA=0, badC=0, figs=0, multi=0;
+    const cats=new Set();
+
+    for(const src of qs){
+      const no=parseInt(pick(src,AL.no),10);
+      const rawCh=pick(src,AL.choices)||[];
+      const choices=rawCh.map(c=>{
+        if(c&&typeof c==='object') return String(pick(c,['text','label','choice','value'])||'');
+        return String(c);
+      });
+      // 選択肢が {text,image} の形でも、画像だけ別配列の形でも拾う
+      const chList=pick(src,AL.chImg);
+      const chImgs=rawCh.map((c,i)=>{
+        if(c&&typeof c==='object'){ const v=pick(c,AL.img); if(v) return String(v); }
+        if(Array.isArray(chList)&&chList[i]) return String(chList[i]);
+        return '';
+      });
+      const qImg=String(pick(src,AL.img)||'');
+      if(!Number.isFinite(no)||choices.length<2){ skipped++; continue; }
+      if(have.has(no)){ dup++; continue; }
+      const ans=normalizeAnswers(pick(src,AL.answer),choices,zero);
+      if(!ans.length) badA++;
+      if(choices.length<4||choices.length>5) badC++;
+      if(ans.length>1) multi++;
+      if(qImg||chImgs.some(Boolean)) figs++;
+      const cat=pick(src,AL.cat); if(cat) cats.add(String(cat));
+      const rec={
+        no, text:String(pick(src,AL.text)||''), choices, answers:ans,
+        category:cat?String(cat):'', explanation:String(pick(src,AL.exp)||'')
+      };
+      if(qImg) rec.image=qImg;
+      if(chImgs.some(Boolean)) rec.choiceImages=chImgs;
+      y.questions.push(rec);
+      have.add(no); n++; added++;
+    }
+    y.questions.sort((a,b)=>a.no-b.no);
+    if(!y.order) y.order=orderKey(ylabel);
+
+    if(n) log('s',`${ylabel} — ${n}問を追加（分野 ${cats.size}種${figs?`／図版 ${figs}問`:''}${multi?`／択二式 ${multi}問`:''}）${dup?` ／ 登録済み ${dup}問は飛ばしました`:''}`);
+    else if(dup){
+      log('w',`${ylabel} — 追加なし。同じ番号の問題が ${dup}問すでにあります`);
+      if(base&&base.builtin)
+        log('','　この年度はこのサイトに最初から入っている分です。改めて取り込む必要はありません');
+      else if(termOf(ylabel)==='その他')
+        log('w','　前期と後期が同じ名前になっている可能性があります。下の「年度ラベル」に「'+ylabel+'後期」のように入力して取り込み直してください');
+    }
+    else log('w',`${ylabel} — 追加できる問題がありませんでした`);
+    if(badA) log('e',`${ylabel} — 正解番号が読めない問題が ${badA}問`);
+    if(badC) log('w',`${ylabel} — 選択肢が4つでも5つでもない問題が ${badC}問`);
+  }
+  if(skipped) log('w',`形式が合わず読み飛ばした項目 ${skipped}件`);
+  return added;
+}
+
+/* ============ セッション ============ */
+function startSession({title,questions,immediate,mode,resume}){
+  if(!questions.length){ toast('出題できる問題がありません'); return; }
+  S = resume || {title,mode,immediate,i:0,ans:questions.map(()=>[]),start:Date.now(),
+                 qs:questions.map(q=>({qid:q.qid,no:q.no,text:q.text,choices:q.choices,answers:q.answers,
+                                       category:q.category,explanation:q.explanation,yearLabel:q.yearLabel,
+                                       image:q.image||'',choiceImages:q.choiceImages||null}))};
+  $('#quiz').classList.add('on');
+  document.body.style.overflow='hidden';
+  renderQ();
+  saveSession();
+}
+function saveSession(){
+  if(S && S.i < S.qs.length) Store.set(K_SESS,S);
+  else Store.del(K_SESS);
+}
+function endSession(save){
+  $('#quiz').classList.remove('on');
+  document.body.style.overflow='';
+  S=null; Store.del(K_SESS);
+  if(save!==false){ renderAll(); }
+}
+
+function renderQ(){
+  const q=S.qs[S.i];
+  $('#q-title').textContent=S.title;
+  $('#q-count').textContent=`${S.i+1} / ${S.qs.length}`;
+  $('#q-prog').style.width=(S.i/S.qs.length*100)+'%';
+  const picked=S.ans[S.i]||[];
+  const need=q.answers.length||1;
+  const show = S.immediate && picked.length===need;
+  const ok = same(picked,q.answers);
+
+  const chs=q.choices.map((c,i)=>{
+    let st='';
+    if(show){ if(q.answers.includes(i)) st='ok'; else if(picked.includes(i)) st='ng'; }
+    else if(picked.includes(i)) st='sel';
+    const ci=(q.choiceImages&&q.choiceImages[i])?`<img class="cfig" src="${esc(q.choiceImages[i])}" alt="">`:'';
+    return `<button class="choice" data-i="${i}" ${show?'disabled':''} ${st?`data-s="${st}"`:''}>
+      <i>${MARKS[i]||i+1}</i><span>${esc(c)}${ci}</span></button>`;
+  }).join('');
+
+  let vd='';
+  if(show){
+    vd=`<div class="verdict ${ok?'ok':'ng'}">
+      <b>${ok?'正解':'不正解 — 正解は '+q.answers.map(a=>MARKS[a]||'?').join('・')+'番'}</b>
+      ${q.explanation?`<div class="exp">${esc(q.explanation)}</div>`:'<span style="color:var(--ink-soft)">解説は登録されていません</span>'}
+    </div>`;
+  }
+
+  const last=S.i===S.qs.length-1;
+  const nextLbl=last?(S.immediate?'結果を見る':'採点する'):'次の問題へ';
+  const canNext = S.immediate ? picked.length===need : picked.length===0||picked.length===need;
+  const hint = need>1
+    ? `<p class="pick-note">正解を <b>${need}つ</b> 選んでください（現在 ${picked.length}つ選択中）</p>`
+    : '';
+
+  $('#q-wrap').innerHTML=`
+    <div class="qmeta">
+      <span class="qno">No.${q.no}</span>
+      ${q.category?`<span class="qcat">${esc(q.category)}</span>`:''}
+      ${q.yearLabel?`<span class="qsrc">${esc(q.yearLabel)}</span>`:''}
+    </div>
+    <div class="qtext">${esc(q.text)}</div>
+    ${q.image?`<img class="qfig" src="${esc(q.image)}" alt="問題図">`:''}
+    ${hint}
+    <div class="choices">${chs}</div>
+    ${vd}
+    <div class="btn-row">
+      ${S.i>0?'<button class="btn btn-quiet" id="q-prev" style="flex:0 0 90px">戻る</button>':''}
+      <button class="btn btn-primary" id="q-next" ${canNext?'':'disabled'}>${nextLbl}</button>
+    </div>
+    ${!S.immediate?'<p class="note">まとめて採点します。最後の問題で「採点する」を押すまで正誤は表示されません。</p>':''}
+  `;
+  window.scrollTo(0,0); $('#quiz').scrollTop=0;
+
+  $$('#q-wrap .choice').forEach(b=>b.onclick=()=>choose(+b.dataset.i));
+  const nx=$('#q-next'); if(nx) nx.onclick=advance;
+  const pv=$('#q-prev'); if(pv) pv.onclick=()=>{S.i--;renderQ();};
+}
+
+function same(a,b){ return a.length===b.length && a.every(x=>b.includes(x)); }
+
+function choose(i){
+  const q=S.qs[S.i];
+  const need=q.answers.length||1;
+  let cur=S.ans[S.i]||[];
+  if(S.immediate && cur.length===need) return;   // 答え合わせ済みは変更不可
+  if(cur.includes(i)) cur=cur.filter(x=>x!==i);  // もう一度押すと解除
+  else if(need===1) cur=[i];
+  else if(cur.length<need) cur=[...cur,i].sort((a,b)=>a-b);
+  else return;                                    // 上限に達したら無視
+  S.ans[S.i]=cur;
+  if(S.immediate && cur.length===need){
+    hist.push({qid:q.qid,cat:q.category||'未分類',correct:same(cur,q.answers),ts:Date.now(),mode:S.mode});
+    Store.set(K_HIST,hist);
+  }
+  saveSession(); renderQ();
+}
+
+function advance(){
+  if(S.i<S.qs.length-1){ S.i++; renderQ(); saveSession(); return; }
+  // 終了
+  if(!S.immediate){
+    const t=Date.now();
+    S.qs.forEach((q,i)=>hist.push({qid:q.qid,cat:q.category||'未分類',correct:same(S.ans[i]||[],q.answers),ts:t,mode:S.mode}));
+    Store.set(K_HIST,hist);
+  }
+  showResult();
+}
+
+function showResult(){
+  const n=S.qs.length;
+  const ok=S.qs.filter((q,i)=>same(S.ans[i]||[],q.answers)).length;
+  const rate=pct(ok,n);
+  const pass=rate>=PASS_RATE*100;
+  const mins=Math.round((Date.now()-S.start)/60000);
+
+  const rows=S.qs.map((q,i)=>{
+    const c=same(S.ans[i]||[],q.answers);
+    return `<div class="rev-item">
+      <button class="rev-h" data-i="${i}">
+        <span class="rev-mark ${c?'ok':'ng'}">${c?'○':'×'}</span>
+        <span class="rev-t">${esc((q.text||'').replace(/\s+/g,' ').slice(0,44))}</span>
+        <span class="rev-n">No.${q.no}</span>
+      </button>
+      <div class="rev-body" id="rb${i}">
+        <div class="qmeta">${q.category?`<span class="qcat">${esc(q.category)}</span>`:''}${q.yearLabel?`<span class="qsrc">${esc(q.yearLabel)}</span>`:''}</div>
+        <div class="qtext" style="font-size:15.5px">${esc(q.text)}</div>
+        ${q.image?`<img class="qfig" src="${esc(q.image)}" alt="問題図">`:''}
+        ${q.choices.map((c2,j)=>`<div class="choice" data-s="${q.answers.includes(j)?'ok':((S.ans[i]||[]).includes(j)?'ng':'')}" style="cursor:default"><i>${MARKS[j]}</i><span>${esc(c2)}${(q.choiceImages&&q.choiceImages[j])?`<img class="cfig" src="${esc(q.choiceImages[j])}" alt="">`:''}</span></div>`).join('')}
+        ${q.explanation?`<div class="verdict ${c?'ok':'ng'}" style="margin-top:12px"><div class="exp">${esc(q.explanation)}</div></div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  $('#q-count').textContent='採点結果';
+  $('#q-prog').style.width='100%';
+  $('#q-close').textContent='閉じる';
+  $('#q-wrap').innerHTML=`
+    <div class="res-head">
+      <div class="res-score">${ok}<small> / ${n}</small></div>
+      <div class="res-rate">正答率 ${rate}％ ・ 所要 ${mins}分${n===EXAM_FULL?'':` ・ ${EXAM_FULL}点換算 ${Math.round(ok/n*EXAM_FULL)}点`}</div>
+      <div class="res-badge ${pass?'pass':'fail'}">${pass?'合格ライン到達':`合格ラインまで あと${Math.max(1,Math.ceil(n*PASS_RATE)-ok)}問`}</div>
+    </div>
+    <div class="rev">${rows}</div>
+    <button class="btn btn-primary" style="margin-top:20px" id="res-done">終える</button>
+  `;
+  $('#quiz').scrollTop=0;
+  $$('#q-wrap .rev-h').forEach(b=>b.onclick=()=>$('#rb'+b.dataset.i).classList.toggle('on'));
+  $('#res-done').onclick=()=>{$('#q-close').textContent='中断';endSession();};
+  Store.del(K_SESS);
+}
+
+/* ============ 出題の組み立て ============ */
+function buildMock(opt){
+  opt=opt||{};
+  const scope=opt.scope||'all', count=opt.count||50;
+  const sm=slotMap();
+  let pool=allQ();
+  if(scope==='前期'||scope==='後期') pool=pool.filter(q=>termOf(q.yearLabel)===scope);
+  else if(scope!=='all') pool=pool.filter(q=>q.year===scope);
+  if(pool.length<10) pool=allQ();          // 絞り込みすぎたら全体に戻す
+  const idx=histIndex();
+  const byCat=new Map();
+  for(const q of pool){
+    if(!q.category) continue;
+    if(!byCat.has(q.category)) byCat.set(q.category,[]);
+    byCat.get(q.category).push(q);
+  }
+  let slots=[...sm.keys()].sort((a,b)=>a-b);
+  if(count<slots.length){                   // 設問番号が偏らないよう等間隔で間引く
+    const step=slots.length/count;
+    slots=Array.from({length:count},(_,i)=>slots[Math.floor(i*step)]);
+  }
+  const used=new Set(); const out=[];
+  for(const no of slots){
+    // その設問番号で最も多い出題形式（選択肢数×正解数）に揃える
+    const fmt=new Map();
+    for(const q of pool) if(q.no===no && q.answers.length){
+      const k=q.choices.length+'x'+q.answers.length;
+      fmt.set(k,(fmt.get(k)||0)+1);
+    }
+    if(!fmt.size) continue;
+    const want=[...fmt.entries()].sort((a,b)=>b[1]-a[1])[0][0];
+    let cands=[];
+    for(const c of sm.get(no)) cands.push(...(byCat.get(c)||[]));
+    cands=cands.filter(q=>!used.has(q.qid)&&q.answers.length&&(q.choices.length+'x'+q.answers.length)===want);
+    if(!cands.length) continue;
+    // 直近に出した問題は後回し
+    cands.sort((a,b)=>((idx.get(a.qid)||{}).last||0)-((idx.get(b.qid)||{}).last||0));
+    const head=cands.slice(0,Math.max(1,Math.ceil(cands.length*0.4)));
+    const q=head[Math.floor(Math.random()*head.length)];
+    used.add(q.qid); out.push({...q,no});
+  }
+  return out;
+}
+
+function weakSets(){
+  const idx=histIndex(), pool=allQ(), cs=catStats();
+  const byId=new Map(pool.map(q=>[q.qid,q]));
+
+  // 誤答（連続2回正解で卒業）
+  const wrong=[];
+  for(const [qid,r] of idx){
+    if(r.ok<r.n && r.streak<2 && byId.has(qid)) wrong.push({...byId.get(qid),_last:r.last});
+  }
+  wrong.sort((a,b)=>a._last-b._last);
+
+  // 弱点分野（3回以上解いた分野のうち正答率が低い順に3つ）
+  const ranked=[...cs.entries()].filter(([,r])=>r.n>=3)
+    .map(([c,r])=>({c,rate:r.ok/r.n,n:r.n})).sort((a,b)=>a.rate-b.rate);
+  const targets=ranked.slice(0,3).map(x=>x.c);
+  const weak=pool.filter(q=>targets.includes(q.category))
+    .sort((a,b)=>{
+      const A=idx.get(a.qid),B=idx.get(b.qid);
+      const ar=A?A.ok/A.n:-1, br=B?B.ok/B.n:-1;   // 未着手を優先
+      return ar-br;
+    });
+
+  const fresh=pool.filter(q=>!idx.has(q.qid));
+  return {wrong,weak,fresh,targets,ranked};
+}
+
+/* ============ 日別・週別の集計 ============ */
+const DAY=86400000;
+function midnight(ts){ const d=new Date(ts); d.setHours(0,0,0,0); return d; }
+function mondayOf(ts){ const d=midnight(ts); d.setDate(d.getDate()-((d.getDay()+6)%7)); return d; }
+function fmtMD(d){ return `${d.getMonth()+1}/${d.getDate()}`; }
+const WD=['月','火','水','木','金','土','日'];
+
+/* 期間ごとに 解答数・正答数・分野内訳 をまとめる */
+function bucket(startOf){
+  const m=new Map();
+  for(const h of hist){
+    if(!h.ts) continue;
+    const k=+startOf(h.ts);
+    let r=m.get(k);
+    if(!r){ r={t:k,n:0,ok:0,cats:new Map(),modes:new Map()}; m.set(k,r); }
+    r.n++; if(h.correct) r.ok++;
+    const c=h.cat||'未分類';
+    const cc=r.cats.get(c)||{n:0,ok:0}; cc.n++; if(h.correct) cc.ok++; r.cats.set(c,cc);
+    const md=h.mode||'past';
+    r.modes.set(md,(r.modes.get(md)||0)+1);
+  }
+  return m;
+}
+
+/* 連続学習日数（今日か昨日を起点に遡る） */
+function streakDays(){
+  const days=new Set([...bucket(midnight).keys()]);
+  if(!days.size) return 0;
+  let cur=+midnight(Date.now());
+  if(!days.has(cur)) cur-=DAY;
+  let n=0;
+  while(days.has(cur)){ n++; cur-=DAY; }
+  return n;
+}
+
+function rateColor(r){ return r<0.5?'var(--ng)':r<0.6?'var(--warn)':'var(--ok)'; }
+const MODE_LABEL={past:'過去問',mock:'模擬試験',weak:'苦手克服'};
+
+/* 要素が無くても落ちないイベント登録 */
+function on(sel,fn){ const e=$(sel); if(e) e.onclick=fn; return e; }
+
+/* 1つの描画が失敗しても他を巻き添えにせず、原因を画面に出す */
+function safe(name,target,fn){
+  try{ fn(); }
+  catch(err){
+    console.error(name,err);
+    const el=$(target);
+    if(el) el.innerHTML=`<div class="panel" style="border-color:var(--ng)">
+      <h3 style="color:var(--ng)">この画面の表示でエラーが起きました</h3>
+      <p class="note">${esc(name)}：${esc(err&&err.message||String(err))}</p>
+      <p class="note">データタブから問題データを書き出して知らせてもらえれば、原因を特定できます。</p></div>`;
+  }
+}
+
+/* ============ 描画 ============ */
+function renderAll(){
+  safe('ヘッダー','#mast-sub',renderMast);
+  safe('ホーム','#home-body',renderHome);
+  safe('過去問','#past-body',renderPast);
+  safe('模擬試験','#mock-body',renderMock);
+  safe('苦手克服','#weak-body',renderWeak);
+  safe('成績','#stats-body',renderStats);
+  safe('データ','#year-list',renderData);
+}
+
+function renderMast(){
+  const ys=yearIds(), n=allQ().length;
+  $('#mast-sub').textContent = ys.length ? `${ys.length}年度 ・ ${n}問 ・ 解答 ${hist.length}回` : 'データ未読み込み';
+}
+
+function renderHome(){
+  const pool=allQ();
+  if(!pool.length){
+    $('#home-body').innerHTML=`<div class="empty">まだ問題がありません。<br>「データ」タブから過去問JSONを追加すると、3つのモードが使えるようになります。</div>
+      <button class="btn btn-primary" style="margin-top:14px" onclick="go('data')">データを追加する</button>`;
+    return;
+  }
+  const cs=catStats();
+  let n=0,ok=0; for(const r of cs.values()){n+=r.n;ok+=r.ok;}
+  const rate=pct(ok,n);
+  const est=n?Math.round(ok/n*EXAM_FULL):0;
+  const passLine=Math.ceil(EXAM_FULL*PASS_RATE);
+  const thin=n>0&&n<EST_MIN;                  // 解答数が少ないうちは参考値
+  const {wrong,ranked}=weakSets();
+  const recent=hist.slice(-120);
+  const rOk=recent.filter(h=>h.correct).length;
+
+  const bottom=ranked.slice(0,3);
+  $('#home-body').innerHTML=`
+    <div class="panel">
+      <h3>いまの推定得点${thin?'（参考値）':''}</h3>
+      <div class="gauge">
+        <div class="gauge-top">
+          <span class="gauge-num">${n?est:'—'}</span>
+          <span class="gauge-unit">/ ${EXAM_FULL}点（合格 ${passLine}点）</span>
+        </div>
+        <div class="gauge-bar">
+          <div class="gauge-fill ${est>=passLine?'pass':''}" style="width:${Math.min(100,est/EXAM_FULL*100)}%"></div>
+          <div class="gauge-line" style="left:${PASS_RATE*100}%"></div>
+        </div>
+        <div class="gauge-legend"><span>0</span><span>合格ライン ${passLine}</span><span>${EXAM_FULL}</span></div>
+      </div>
+      <p class="note">${n
+        ? `一次検定は50問から40問を選んで解答する${EXAM_FULL}点満点です。ここでは解いた問題数にかかわらず、全解答 ${n}回の正答率 ${rate}％ をその${EXAM_FULL}点満点に置き換えています。`
+        : 'まだ解答履歴がありません。'}${thin?`<br>まだ ${n}回しか解いていないため、数字は大きく振れます。${EST_MIN}回を超えたあたりから落ち着きます。`:''}</p>
+    </div>
+
+    <div class="panel" style="padding:0">
+      <div class="strip">
+        <div><b>${wrong.length}</b><span>復習待ち</span></div>
+        <div><b>${pct(rOk,recent.length)}<span style="font-size:13px">％</span></b><span>直近の正答率</span></div>
+        <div><b>${pool.length}</b><span>登録問題</span></div>
+      </div>
+    </div>
+
+    ${bottom.length?`<div class="panel">
+      <h3>点を落としている分野</h3>
+      ${bottom.map(x=>`<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--rule)">
+        <span class="heat"><i style="width:${Math.round(x.rate*100)}%;background:${x.rate<0.5?'var(--ng)':x.rate<0.6?'var(--warn)':'var(--ok)'}"></i></span>
+        <span style="flex:1;font-size:13px">${esc(x.c)}</span>
+        <span style="font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink-soft)">${Math.round(x.rate*100)}％</span>
+      </div>`).join('')}
+      <button class="btn btn-primary" style="margin-top:14px" onclick="go('weak')">苦手克服モードへ</button>
+    </div>`:''}
+
+    <div class="panel">
+      <h3>今日はどれから</h3>
+      <button class="btn" onclick="go('past')"><b>過去問モード</b><small>年度をそのままの並びで解く</small></button>
+      <button class="btn" onclick="go('mock')"><b>模擬試験モード</b><small>全年度から組み替えた1セットを本番形式で</small></button>
+      <button class="btn" onclick="go('weak')"><b>苦手克服モード</b><small>間違えた問題と弱い分野だけを集中的に</small></button>
+    </div>`;
+}
+
+function renderPast(){
+  const ys=yearIds(), tabsEl=$('#past-term');
+  if(!ys.length){
+    tabsEl.innerHTML=''; tabsEl.hidden=true;
+    $('#past-body').innerHTML='<div class="empty">年度データがありません。「データ」タブから追加してください。</div>';
+    return;
+  }
+  // 前期／後期でまとめる
+  const groups=new Map();
+  for(const id of ys){
+    const t=termOf(YRS[id].label);
+    if(!groups.has(t)) groups.set(t,[]);
+    groups.get(t).push(id);
+  }
+  const terms=['前期','後期','その他'].filter(t=>groups.has(t));
+  const tabs=terms.length>1?['すべて',...terms]:[];
+  const cur=tabs.includes(cfg.pastTerm)?cfg.pastTerm:'すべて';
+
+  tabsEl.hidden=!tabs.length;
+  tabsEl.innerHTML=tabs.map(t=>{
+    const n=(t==='すべて'?ys:groups.get(t)).length;
+    return `<button data-t="${t}" aria-pressed="${t===cur}">${t}<span>${n}</span></button>`;
+  }).join('');
+  tabsEl.querySelectorAll('button').forEach(b=>b.onclick=async()=>{
+    cfg.pastTerm=b.dataset.t; await Store.set(K_CFG,cfg); renderPast();
+  });
+
+  const idx=histIndex();
+  const card=id=>{
+    const y=YRS[id];
+    const done=y.questions.filter(q=>idx.has(id+'#'+q.no));
+    const ok=done.reduce((s,q)=>s+((idx.get(id+'#'+q.no).streak>0)?1:0),0);
+    return `<button class="btn" data-y="${esc(id)}">
+      <b>${esc(y.label)}</b>
+      <small>${y.questions.length}問 ・ ${done.length?`着手 ${done.length}問／直近正解 ${ok}問`:'未着手'}</small>
+    </button>`;
+  };
+
+  // 「すべて」のときだけ回ごとの小見出しを挟む
+  $('#past-body').innerHTML = (cur==='すべて' && tabs.length)
+    ? terms.map(t=>`<div class="grp-label">${t}</div>`+groups.get(t).map(card).join('')).join('')
+    : (cur==='すべて'?ys:groups.get(cur)).map(card).join('');
+
+  $$('#past-body .btn').forEach(b=>b.onclick=()=>{
+    const y=YRS[b.dataset.y];
+    const qs=y.questions.map(q=>({...q,year:b.dataset.y,yearLabel:y.label,qid:b.dataset.y+'#'+q.no}));
+    startSession({title:y.label,questions:qs,immediate:cfg.pastMode==='each',mode:'past'});
+  });
+}
+
+function renderMock(){
+  const pool=allQ(), ys=yearIds(), sm=slotMap();
+  if(pool.length<20){
+    $('#mock-body').innerHTML=`<div class="empty">模擬試験を組むには問題数が足りません。<br>現在 ${pool.length}問／年度 ${ys.length}件です。20問以上必要です。</div>
+      <button class="btn btn-primary" style="margin-top:14px" onclick="go('data')">データを追加する</button>`;
+    return;
+  }
+  const scopes=[['all','すべての年度']];
+  for(const t of ['前期','後期']) if(ys.some(id=>termOf(YRS[id].label)===t)) scopes.push([t,t+'のみ']);
+  for(const id of ys) scopes.push([id,YRS[id].label]);
+  const scope=scopes.some(x=>x[0]===cfg.mockScope)?cfg.mockScope:'all';
+  const counts=[50,25,10];
+  const count=counts.includes(cfg.mockCount)?cfg.mockCount:50;
+
+  const set=buildMock({scope,count});
+  const cover=new Map();
+  for(const q of set) cover.set(q.category,(cover.get(q.category)||0)+1);
+
+  $('#mock-body').innerHTML=`
+    <div class="panel">
+      <h3>出題の条件</h3>
+      <label class="fld" for="mock-scope">出題範囲</label>
+      <select id="mock-scope">
+        ${scopes.map(([v,l])=>`<option value="${esc(v)}"${v===scope?' selected':''}>${esc(l)}</option>`).join('')}
+      </select>
+      <label class="fld" for="mock-count">問題数</label>
+      <div class="seg" id="mock-count">
+        ${counts.map(c=>`<button data-c="${c}" aria-pressed="${c===count}">${c}問${c===50?'（本番）':''}</button>`).join('')}
+      </div>
+      <button class="btn btn-primary" id="mock-go">この条件で始める</button>
+      <button class="btn btn-quiet" style="margin-top:9px" id="mock-re">問題を組み替える</button>
+    </div>
+
+    <div class="panel">
+      <h3>組み立てた1セット</h3>
+      <div class="gauge-top" style="margin-bottom:12px">
+        <span class="gauge-num">${set.length}</span><span class="gauge-unit">問（設問番号順）</span>
+      </div>
+      ${set.length<count?`<p class="chip warn">${count-set.length}問分は在庫不足で埋まりません</p>`:'<p class="chip">指定した問題数を充填できます</p>'}
+      <p class="note">在庫は ${ys.length}年度 ${pool.length}問。年度を追加するほど組み合わせが増えます。</p>
+    </div>
+
+    <div class="panel">
+      <h3>この回の分野構成</h3>
+      ${[...cover.entries()].sort((a,b)=>b[1]-a[1]).map(([c,n])=>`<span class="chip">${esc(c||'未分類')} ${n}</span>`).join('')||'<p class="note">分野情報が登録されていません。</p>'}
+    </div>`;
+
+  const sel=$('#mock-scope');
+  if(sel) sel.onchange=async()=>{ cfg.mockScope=sel.value; await Store.set(K_CFG,cfg); renderMock(); };
+  const cs=$('#mock-count');
+  if(cs) cs.querySelectorAll('button').forEach(b=>b.onclick=async()=>{
+    cfg.mockCount=+b.dataset.c; await Store.set(K_CFG,cfg); renderMock();
+  });
+  on('#mock-go',()=>{
+    if(!set.length){ toast('出題できる問題がありません'); return; }
+    startSession({title:'模擬試験（'+new Date().toLocaleDateString('ja-JP')+'）',
+                  questions:set,immediate:false,mode:'mock'});
+  });
+  on('#mock-re',renderMock);
+}
+
+function renderWeak(){
+  const pool=allQ();
+  if(!pool.length){
+    $('#weak-body').innerHTML=`<div class="empty">問題データがありません。<br>「データ」タブから過去問JSONを追加してください。</div>
+      <button class="btn btn-primary" style="margin-top:14px" onclick="go('data')">データを追加する</button>`;
+    return;
+  }
+  const {wrong,weak,fresh,targets}=weakSets();
+  const N=(a)=>Math.min(20,a.length);
+  $('#weak-body').innerHTML=`
+    ${hist.length?'':'<p class="pick-note">まだ解答履歴がないので、いまは「まだ解いていない問題」だけ使えます。何問か解くと、間違えた問題と弱い分野がここに集まります。</p>'}
+    <button class="btn" id="w-wrong" ${wrong.length?'':'disabled'}>
+      <b>間違えた問題をやり直す</b>
+      <small>${wrong.length?`${wrong.length}問が復習待ち（1回で最大${N(wrong)}問）・連続2回正解で卒業`:'復習待ちはありません'}</small>
+    </button>
+    <button class="btn" id="w-weak" ${weak.length?'':'disabled'}>
+      <b>弱い分野を集中する</b>
+      <small>${targets.length?`対象：${targets.map(esc).join(' / ')}`:'分野を判定するには各分野3回以上の解答が必要です'}</small>
+    </button>
+    <button class="btn" id="w-fresh" ${fresh.length?'':'disabled'}>
+      <b>まだ解いていない問題</b>
+      <small>${fresh.length?`${fresh.length}問が未着手（1回で最大${N(fresh)}問）`:'すべての問題に着手済みです'}</small>
+    </button>
+    <p class="note">いずれも1問ずつ答え合わせで進みます。ここでの結果も成績に反映されます。</p>`;
+
+  const run=(arr,title)=>startSession({title,questions:arr.slice(0,20),immediate:true,mode:'weak'});
+  const bind=(id,fn)=>{ const b=$(id); if(b&&!b.disabled) b.onclick=fn; };
+  bind('#w-wrong',()=>run(wrong,'間違えた問題'));
+  bind('#w-weak',()=>run(weak,'弱い分野の集中'));
+  bind('#w-fresh',()=>run(shuffle(fresh.slice()),'未着手の問題'));
+}
+
+function renderStats(){
+  const tabs=[['cat','分野別'],['day','日別'],['week','週別']];
+  const cur=tabs.some(t=>t[0]===cfg.statsTab)?cfg.statsTab:'cat';
+  const te=$('#stats-tab');
+  te.innerHTML=tabs.map(([k,l])=>`<button data-s="${k}" aria-pressed="${k===cur}">${l}</button>`).join('');
+  te.querySelectorAll('button').forEach(b=>b.onclick=async()=>{
+    cfg.statsTab=b.dataset.s; await Store.set(K_CFG,cfg); renderStats();
+  });
+  if(!hist.length){ $('#stats-body').innerHTML='<div class="empty">解答履歴がまだありません。<br>過去問モードか模擬試験モードを一度こなすと、ここに記録が並びます。</div>'; return; }
+  ({cat:statsByCat,day:statsByDay,week:statsByWeek})[cur]();
+}
+
+/* ---- 分野別 ---- */
+function statsByCat(){
+  const cs=catStats();
+  const rows=[...cs.entries()].map(([c,r])=>({c,r:r.ok/r.n,n:r.n,ok:r.ok})).sort((a,b)=>a.r-b.r);
+  let n=0,ok=0; for(const x of rows){n+=x.n;ok+=x.ok;}
+  $('#stats-body').innerHTML=`
+    <div class="panel" style="padding:0"><div class="strip">
+      <div><b>${pct(ok,n)}<span style="font-size:13px">％</span></b><span>全体の正答率</span></div>
+      <div><b>${n}</b><span>のべ解答数</span></div>
+      <div><b>${rows.filter(x=>x.r<PASS_RATE).length}</b><span>ライン未達の分野</span></div>
+    </div></div>
+    <div class="panel">
+      <h3>分野別</h3>
+      <table class="tbl"><thead><tr><th>分野</th><th style="width:120px">正答率</th><th class="n">解答</th></tr></thead><tbody>
+      ${rows.map(x=>`<tr><td>${esc(x.c)}</td>
+        <td><span class="heat"><i style="width:${Math.round(x.r*100)}%;background:${rateColor(x.r)}"></i></span><span style="font-variant-numeric:tabular-nums">${Math.round(x.r*100)}％</span></td>
+        <td class="n">${x.ok}/${x.n}</td></tr>`).join('')}
+      </tbody></table>
+      <p class="note">網掛けが60%に届かない分野が、合格ラインを削っている箇所です。</p>
+    </div>`;
+}
+
+/* ---- 日別 ---- */
+function statsByDay(){
+  const m=bucket(midnight);
+  const today=+midnight(Date.now());
+  const days=[];
+  for(let i=13;i>=0;i--){ const t=today-i*DAY; days.push(m.get(t)||{t,n:0,ok:0,cats:new Map(),modes:new Map()}); }
+  const max=Math.max(1,...days.map(d=>d.n));
+  const t0=m.get(today)||{n:0,ok:0};
+  const wk=days.slice(-7); const wn=wk.reduce((s,d)=>s+d.n,0), wo=wk.reduce((s,d)=>s+d.ok,0);
+  const active=[...m.values()].sort((a,b)=>b.t-a.t);
+
+  $('#stats-body').innerHTML=`
+    <div class="panel" style="padding:0"><div class="strip">
+      <div><b>${t0.n}</b><span>今日の解答</span></div>
+      <div><b>${streakDays()}</b><span>連続学習日数</span></div>
+      <div><b>${pct(wo,wn)}<span style="font-size:13px">％</span></b><span>直近7日の正答率</span></div>
+    </div></div>
+
+    <div class="panel">
+      <h3>この2週間</h3>
+      <div class="bars">
+        ${days.map(d=>{
+          const dt=new Date(d.t), isToday=d.t===today;
+          const h=d.n?Math.max(6,Math.round(d.n/max*100)):0;
+          const r=d.n?d.ok/d.n:0;
+          return `<div class="bar-col" title="${fmtMD(dt)} ${d.n}問">
+            <div class="bar-val">${d.n||''}</div>
+            <div class="bar-track"><i style="height:${h}%;background:${d.n?rateColor(r):'transparent'}"></i></div>
+            <div class="bar-lb${isToday?' now':''}">${WD[(dt.getDay()+6)%7]}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <p class="note">棒の高さが解答数、色が正答率です（緑は60%以上、黄は50%台、赤は50%未満）。</p>
+    </div>
+
+    <div class="panel">
+      <h3>解いた日の記録</h3>
+      <table class="tbl"><thead><tr><th>日付</th><th class="n">解答</th><th style="width:110px">正答率</th><th>内訳</th></tr></thead><tbody>
+      ${active.slice(0,30).map(d=>{
+        const dt=new Date(d.t), r=d.ok/d.n;
+        const md=[...d.modes.entries()].sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${MODE_LABEL[k]||k} ${v}`).join(' / ');
+        return `<tr><td style="white-space:nowrap">${dt.getFullYear()}/${fmtMD(dt)}（${WD[(dt.getDay()+6)%7]}）</td>
+          <td class="n">${d.ok}/${d.n}</td>
+          <td><span class="heat"><i style="width:${Math.round(r*100)}%;background:${rateColor(r)}"></i></span><span style="font-variant-numeric:tabular-nums">${Math.round(r*100)}％</span></td>
+          <td style="font-size:12px;color:var(--ink-soft)">${esc(md)}</td></tr>`;
+      }).join('')}
+      </tbody></table>
+      ${active.length>30?`<p class="note">直近30日分を表示しています（記録は全${active.length}日）。</p>`:''}
+    </div>`;
+}
+
+/* ---- 週別 ---- */
+function statsByWeek(){
+  const m=bucket(mondayOf);
+  const thisWeek=+mondayOf(Date.now());
+  const weeks=[];
+  for(let i=7;i>=0;i--){ const t=thisWeek-i*7*DAY; weeks.push(m.get(t)||{t,n:0,ok:0,cats:new Map(),modes:new Map()}); }
+  const max=Math.max(1,...weeks.map(w=>w.n));
+  const cwk=weeks[weeks.length-1], pwk=weeks[weeks.length-2];
+  const diff=cwk.n-pwk.n;
+  const rd=(cwk.n&&pwk.n)?Math.round(cwk.ok/cwk.n*100)-Math.round(pwk.ok/pwk.n*100):null;
+  const listed=[...m.values()].sort((a,b)=>b.t-a.t);
+
+  const span=t=>{const a=new Date(t),b=new Date(t+6*DAY);return `${fmtMD(a)}〜${fmtMD(b)}`;};
+
+  $('#stats-body').innerHTML=`
+    <div class="panel" style="padding:0"><div class="strip">
+      <div><b>${cwk.n}</b><span>今週の解答</span></div>
+      <div><b>${diff>0?'+':''}${diff}</b><span>前週比（問数）</span></div>
+      <div><b>${rd===null?'—':(rd>0?'+':'')+rd}<span style="font-size:13px">${rd===null?'':'pt'}</span></b><span>前週比（正答率）</span></div>
+    </div></div>
+
+    <div class="panel">
+      <h3>直近8週</h3>
+      <div class="bars">
+        ${weeks.map((w,i)=>{
+          const h=w.n?Math.max(6,Math.round(w.n/max*100)):0;
+          const r=w.n?w.ok/w.n:0;
+          return `<div class="bar-col">
+            <div class="bar-val">${w.n||''}</div>
+            <div class="bar-track"><i style="height:${h}%;background:${w.n?rateColor(r):'transparent'}"></i></div>
+            <div class="bar-lb${i===weeks.length-1?' now':''}">${fmtMD(new Date(w.t))}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <p class="note">各週の月曜日を起点にしています。ラベルは週の初日です。</p>
+    </div>
+
+    <div class="panel">
+      <h3>週ごとの記録</h3>
+      <table class="tbl"><thead><tr><th>期間</th><th class="n">解答</th><th style="width:110px">正答率</th><th>その週の弱点</th></tr></thead><tbody>
+      ${listed.slice(0,12).map(w=>{
+        const r=w.ok/w.n;
+        const weak=[...w.cats.entries()].filter(([,c])=>c.n>=2).map(([k,c])=>({k,r:c.ok/c.n}))
+          .sort((a,b)=>a.r-b.r)[0];
+        return `<tr><td style="white-space:nowrap">${span(w.t)}</td>
+          <td class="n">${w.ok}/${w.n}</td>
+          <td><span class="heat"><i style="width:${Math.round(r*100)}%;background:${rateColor(r)}"></i></span><span style="font-variant-numeric:tabular-nums">${Math.round(r*100)}％</span></td>
+          <td style="font-size:12px;color:var(--ink-soft)">${weak?esc(weak.k)+` ${Math.round(weak.r*100)}％`:'—'}</td></tr>`;
+      }).join('')}
+      </tbody></table>
+      <p class="note">「その週の弱点」は、2問以上解いた分野のうち最も正答率が低かったものです。</p>
+    </div>`;
+}
+
+function renderData(){
+  const ys=yearIds();
+  $('#year-list').innerHTML = ys.length ? ys.map(id=>{
+    const y=YRS[id];
+    const miss=y.questions.filter(q=>!(q.answers||[]).length).length;
+    const nocat=y.questions.filter(q=>!q.category).length;
+    const figs=y.questions.filter(q=>q.image||(q.choiceImages&&q.choiceImages.some(Boolean))).length;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule)">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13.5px;font-weight:600">${esc(y.label)}${y.builtin?'<span class="chip" style="margin-left:7px">最初から入っている分</span>':''}</div>
+        <div style="font-size:12px;color:var(--ink-soft)">${y.questions.length}問${y.mine?`（うち自分で足した分 ${y.mine}問）`:''}${figs?` ・ 図版 ${figs}問`:''}${miss?` ・ <span style="color:var(--ng)">正解未設定 ${miss}</span>`:''}${nocat?` ・ 分野なし ${nocat}`:''}</div>
+      </div>
+      ${y.builtin?'':`<button class="del-btn" data-del="${esc(id)}">削除</button>`}
+    </div>`;
+  }).join('') + `<p class="note">このブラウザに保存している分の大きさ：約 ${(JSON.stringify(bank).length/1024/1024).toFixed(2)} MB（上限の目安 5 MB）。「最初から入っている分」はサイト側にあるため、この容量には入りません。</p>`
+   : '<p class="note">まだ年度が登録されていません。</p>';
+
+  $$('#year-list [data-del]').forEach(b=>b.onclick=async()=>{
+    const id=b.dataset.del, y=bank.years[id];
+    if(!y) return;
+    const okd=await ask(`${y.label} を削除します`,
+      `${y.questions.length}問が消えます。この年度の解答履歴は成績に残りますが、問題を解き直すには読み込み直しが必要です。`,
+      '削除する',true);
+    if(!okd) return;
+    delete bank.years[id]; await Store.set(K_BANK,bank); rebuild(); renderAll(); toast(`${y.label} を削除しました`);
+  });
+}
+
+/* ============ 取り込みUI ============ */
+function logLine(cls,msg){
+  const el=$('#import-log'); el.hidden=false;
+  el.insertAdjacentHTML('beforeend',`<div class="${cls}">${esc(msg)}</div>`);
+  el.scrollTop=el.scrollHeight;
+}
+async function handleJSON(text,name){
+  logLine('', `— ${name} —`);
+  let obj;
+  try{ obj=JSON.parse(text); }
+  catch(e){ logLine('e','JSONとして読めません: '+e.message); return; }
+  const forced=$('#year-override').value.trim();
+  const n=importJSON(obj,logLine,forced||null);
+  if(n){
+    await Store.set(K_BANK,bank);
+    rebuild(); renderAll(); toast(`${n}問を追加しました`);
+  }
+}
+on('#pick-file',()=>{ const f=$('#file-in'); if(f) f.click(); });
+const fileIn=$('#file-in'); if(fileIn) fileIn.onchange=async e=>{
+  $('#import-log').innerHTML='';
+  for(const f of e.target.files){ await handleJSON(await f.text(),f.name); }
+  e.target.value='';
+};
+on('#paste-toggle',()=>{ const b=$('#paste-box'); if(b) b.hidden=!b.hidden; });
+on('#paste-go',async()=>{
+  const t=$('#paste-area').value.trim();
+  if(!t){ toast('JSONを貼り付けてください'); return; }
+  $('#import-log').innerHTML='';
+  await handleJSON(t,'貼り付けデータ');
+  $('#paste-area').value='';
+});
+
+function download(obj,name){
+  const b=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+  const u=URL.createObjectURL(b), a=document.createElement('a');
+  a.href=u; a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(u),1000);
+}
+/* 書き出しは配布分も自分で足した分もまとめて。内部用の印は落とす */
+function exportYears(){
+  const out={};
+  for(const [id,y] of Object.entries(YRS)) out[id]={label:y.label,order:y.order,questions:y.questions};
+  return out;
+}
+on('#export-bank',()=>download({format:BANK_FORMAT,zeroBased:true,savedAt:new Date().toISOString(),years:exportYears()},
+                               'kenchiku2q-questions.json'));
+on('#export-hist',()=>download(hist,'kenchiku2q-history.json'));
+on('#reset-hist',async()=>{
+  if(!await ask('解答履歴をすべて消します','問題データは残ります。成績と苦手克服モードの内容が初期状態に戻ります。','消す',true)) return;
+  hist=[]; await Store.set(K_HIST,hist); renderAll(); toast('履歴を消しました');
+});
+
+/* ============ ナビ ============ */
+function go(v){
+  $$('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  $$('#tabs button').forEach(b=>b.setAttribute('aria-current',String(b.dataset.v===v)));
+  window.scrollTo(0,0);
+}
+window.go=go;
+$$('#tabs button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+$$('#past-seg button').forEach(b=>b.onclick=async()=>{
+  cfg.pastMode=b.dataset.m;
+  $$('#past-seg button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  await Store.set(K_CFG,cfg);
+});
+on('#q-close',async()=>{
+  if(S && S.i<S.qs.length){
+    if(!await ask('演習を中断します','ここまでの解答は残ります。次に開いたとき、続きから再開できます。','中断する')) return;
+  }
+  $('#q-close').textContent='中断';
+  $('#quiz').classList.remove('on'); document.body.style.overflow='';
+  if(S) saveSession();
+  S=null; renderAll();
+});
+
+/* ============ 配布データの読み込み ============ */
+/* HTML内の #bundled-data を先に見て、無ければ同じ場所の questions.json を取りに行く。
+   どちらも保存はしない。差し替えれば、次に開いた全員にそのまま届く。 */
+async function loadBuiltin(){
+  let obj=null;
+  const el=document.getElementById('bundled-data');
+  const raw=el?el.textContent.trim():'';
+  if(raw && raw!=='null' && raw!=='{}'){
+    try{ obj=JSON.parse(raw); }
+    catch(e){ console.error('bundled-data の JSON が壊れています',e); }
+  }
+  if(!obj){
+    try{
+      const r=await fetch('./questions.json',{cache:'no-cache'});
+      if(r.ok) obj=await r.json();
+    }catch(e){ /* 未設置、または file:// で開いている */ }
+  }
+  if(!obj) return;
+
+  // importJSON は bank に書き込むので、いったん入れ替えて結果を builtin に移す
+  const keepBank=bank, keepY=YRS;
+  bank={years:{}}; YRS={};
+  let n=0;
+  try{ n=importJSON(obj,(c,m)=>{ if(c==='e') console.warn('配布データ:',m); },null); }
+  catch(e){ console.error('配布データの取り込みに失敗',e); }
+  builtin = n?bank:{years:{}};
+  bank=keepBank; YRS=keepY;
+}
+
+/* ============ 起動 ============ */
+(async function init(){
+  bank=(await Store.get(K_BANK))||{years:{}};
+  if(!bank.years) bank={years:{}};
+  hist=(await Store.get(K_HIST))||[];
+  cfg=(await Store.get(K_CFG))||{pastMode:'each'};
+  await loadBuiltin();
+  rebuild();
+  $$('#past-seg button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.m===cfg.pastMode)));
+  renderAll();
+
+  const sess=await Store.get(K_SESS);
+  if(sess && sess.qs && sess.i<sess.qs.length){
+    if(await ask('途中の演習があります',`「${sess.title}」を ${sess.i+1}問目まで解いています。続きから再開しますか。`,'再開する')){
+      startSession({resume:sess});
+    } else { Store.del(K_SESS); }
+  }
+})();
+</script>
+</body>
+</html>
